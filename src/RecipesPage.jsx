@@ -1,33 +1,25 @@
 import { RecipesIndex } from "./RecipesIndex";
 import { RecipesNew } from "./RecipesNew";
+import axios from "axios";
 
 export function RecipesPage() {
   // where all the data comes from
   // prop - how we get data from one component to the next
-  let recipes = [
-    {
-      id: 1,
-      title: "Raw Eggs",
-      chef: "Peter Jang",
-      image_url: "https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg"
-    },
-    {
-      id: 2,
-      title: "Mud Pie",
-      chef: "Jay Wengrow",
-      image_url: "https://static.onecms.io/wp-content/uploads/sites/9/2017/12/mud-pie-XL-RECIPE2016.jpg"
-    },
-    {
-      id: 3,
-      title: "Butter Chicken",
-      chef: "Leon",
-      image_url: "https://nickskitchen.com/wp-content/uploads/2025/08/NK_Butter-Ckn_1-scaled.jpg"
-    }
-  ];
+  // we'll be using a 3rd party library called axios to make requests to our backend
+  // react state 
+  let recipes = [];
+
+  const handleIndex = () => {
+    axios.get("http://localhost:3000/recipes.json").then((response) => {
+      console.log(response.data);
+      recipes = response.data;
+    })
+  }
 
   return (
     <div>
       <RecipesNew />
+      <button onClick={handleIndex}>Load Recipes</button>
       <RecipesIndex recipesProp={recipes} />
     </div>
   );
