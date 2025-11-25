@@ -3,6 +3,7 @@ import { RecipesNew } from "./RecipesNew";
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import { Modal } from "./Modal";
+import { RecipesShow } from "./RecipesShow";
 
 export function RecipesPage() {
   // where all the data comes from
@@ -40,8 +41,7 @@ export function RecipesPage() {
       <RecipesNew />
       <RecipesIndex recipesProp={recipes} onShow={handleShow} />
       <Modal show={isRecipesShowVisible} onClose={() => setIsRecipesShowVisible(false)}>
-        <h2>{currentRecipe.title}</h2>
-        <p>Chef: {currentRecipe.chef}</p>
+        <RecipesShow recipe={currentRecipe} />
       </Modal>
     </div>
   );
