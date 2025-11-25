@@ -2,6 +2,7 @@ import { RecipesIndex } from "./RecipesIndex";
 import { RecipesNew } from "./RecipesNew";
 import axios from "axios";
 import { useState, useEffect } from 'react';
+import { Modal } from "./Modal";
 
 export function RecipesPage() {
   // where all the data comes from
@@ -12,12 +13,20 @@ export function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
   // special state variable - recipes
   // function to update the state variable - setRecipes
+  const [isRecipesShowVisible, setIsRecipesShowVisible] = useState(false);
+  const [currentRecipe, setCurrentRecipe] = useState({});
 
   const handleIndex = () => {
     axios.get("http://localhost:3000/recipes.json").then((response) => {
       console.log(response.data);
       setRecipes(response.data);
     })
+  }
+
+  const handleShow = (recipe) => {
+    console.log("handleShow", recipe)
+    setIsRecipesShowVisible(true);
+    setCurrentRecipe(recipe);
   }
 
   // handleIndex();
@@ -29,7 +38,11 @@ export function RecipesPage() {
   return (
     <div>
       <RecipesNew />
-      <RecipesIndex recipesProp={recipes} />
+      <RecipesIndex recipesProp={recipes} onShow={handleShow} />
+      <Modal show={isRecipesShowVisible} onClose={() => setIsRecipesShowVisible(false)}>
+        <h2>{currentRecipe.title}</h2>
+        <p>Chef: {currentRecipe.chef}</p>
+      </Modal>
     </div>
   );
 }
