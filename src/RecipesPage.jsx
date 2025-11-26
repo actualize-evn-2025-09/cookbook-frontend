@@ -43,6 +43,28 @@ export function RecipesPage() {
     })
   }
 
+  const handleUpdate = (recipe, params) => {
+    console.log("handleUpdate");
+    axios.patch(`http://localhost:3000/recipes/${recipe.id}.json`, params)
+      .then((response) => {
+      console.log(response.data);
+      // let updatedRecipes = [];
+      // let index = 0;
+      // while (index < recipes.length) {
+      //   if (recipes[index].id === response.data.id) {
+      //     updatedRecipes.push(response.data)
+      //   } else {
+      //     updatedRecipes.push(recipes[index])
+      //   }
+      //   index += 1
+      // }
+      // setRecipes(updatedRecipes);
+
+      setRecipes(recipes.map(r => r.id === response.data.id ? response.data : r))
+      setIsRecipesShowVisible(false);
+    })
+  }
+
   // handleIndex();
   useEffect(handleIndex, []);
   // useEffect - react hook
@@ -54,7 +76,7 @@ export function RecipesPage() {
       <RecipesNew onCreate={handleCreate} />
       <RecipesIndex recipesProp={recipes} onShow={handleShow} />
       <Modal show={isRecipesShowVisible} onClose={() => setIsRecipesShowVisible(false)}>
-        <RecipesShow recipe={currentRecipe} />
+        <RecipesShow recipe={currentRecipe} onUpdate={handleUpdate} />
       </Modal>
     </div>
   );
