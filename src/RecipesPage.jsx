@@ -18,7 +18,7 @@ export function RecipesPage() {
   const [currentRecipe, setCurrentRecipe] = useState({});
 
   const handleIndex = () => {
-    axios.get("http://localhost:3000/recipes.json").then((response) => {
+    axios.get("/recipes.json").then((response) => {
       setRecipes(response.data);
     })
   }
@@ -29,7 +29,7 @@ export function RecipesPage() {
   }
 
   const handleCreate = (params) => {
-    axios.post("http://localhost:3000/recipes.json", params).then((response) => {
+    axios.post("/recipes.json", params).then((response) => {
       // let copiedRecipes = Array.from(recipes);
       // copiedRecipes.push(response.data);
       // setRecipes(copiedRecipes);
@@ -40,7 +40,7 @@ export function RecipesPage() {
   }
 
   const handleUpdate = (recipe, params) => {
-    axios.patch(`http://localhost:3000/recipes/${recipe.id}.json`, params)
+    axios.patch(`/recipes/${recipe.id}.json`, params)
       .then((response) => {
       // let updatedRecipes = [];
       // let index = 0;
@@ -60,7 +60,7 @@ export function RecipesPage() {
   }
 
   const handleDestroy = (recipe) => {
-    axios.delete(`http://localhost:3000/recipes/${recipe.id}.json`)
+    axios.delete(`/recipes/${recipe.id}.json`)
       .then((response) => {
         setRecipes(recipes.filter(r => r.id !== recipe.id));
         setIsRecipesShowVisible(false);
