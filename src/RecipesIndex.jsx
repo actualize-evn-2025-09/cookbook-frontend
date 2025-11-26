@@ -1,13 +1,13 @@
-export function RecipesIndex(props) {
+export function RecipesIndex({ recipesProp, onShow }) {
   return (
     <div id="recipes-index">
-      <h1>All {props.recipesProp.length} Recipes</h1>
-      {props.recipesProp.map((recipe) => (
+      <h1>All {recipesProp.length} Recipes</h1>
+      {recipesProp.map((recipe) => (
         <div key={recipe.id} className="recipes">
           <h2>{recipe.title}</h2>
           <img src={recipe.image_url} />
           <p>Chef: {recipe.chef}</p>
-          <button onClick={() => props.onShow(recipe)}>More Info</button>
+          <button onClick={() => onShow(recipe)}>More Info</button>
         </div>
       ))}
     </div>

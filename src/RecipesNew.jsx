@@ -1,11 +1,11 @@
-export function RecipesNew(props) {
+export function RecipesNew({ onCreate }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // prevents the browser's default behavior
     // preventing the browser from refreshing 
     const form = event.target;
     const params = new FormData(form);
-    props.onCreate(params);
+    onCreate(params);
     form.reset();
   }
 

@@ -1,32 +1,32 @@
-export function RecipesShow(props) {
+export function RecipesShow({ onUpdate, recipe, onDestroy }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const params = new FormData(form);
-    props.onUpdate(props.recipe, params);
+    onUpdate(recipe, params);
     form.reset();
   }
 
   return (
     <div id="recipes-show">
       <h1>Recipe Info:</h1>
-      <h2>{props.recipe.title}</h2>
-      <p>Chef: {props.recipe.chef}</p>
+      <h2>{recipe.title}</h2>
+      <p>Chef: {recipe.chef}</p>
       <hr />
       <h2>Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          Title: <input name="title" defaultValue={props.recipe.title} type="text" />
+          Title: <input name="title" defaultValue={recipe.title} type="text" />
         </div>
         <div>
-          Chef: <input name="chef" defaultValue={props.recipe.chef} type="text" />
+          Chef: <input name="chef" defaultValue={recipe.chef} type="text" />
         </div>
         <div>
-          Image URL: <input name="image_url" defaultValue={props.recipe.image_url} type="text" />
+          Image URL: <input name="image_url" defaultValue={recipe.image_url} type="text" />
         </div>
         <button type="submit">Update Recipe</button>
       </form>
-      <button onClick={() => props.onDestroy(props.recipe)}>Delete Recipe</button>
+      <button onClick={() => onDestroy(recipe)}>Delete Recipe</button>
     </div>
   )
 }
