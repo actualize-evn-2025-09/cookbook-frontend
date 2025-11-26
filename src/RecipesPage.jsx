@@ -19,21 +19,17 @@ export function RecipesPage() {
 
   const handleIndex = () => {
     axios.get("http://localhost:3000/recipes.json").then((response) => {
-      console.log(response.data);
       setRecipes(response.data);
     })
   }
 
   const handleShow = (recipe) => {
-    console.log("handleShow", recipe)
     setIsRecipesShowVisible(true);
     setCurrentRecipe(recipe);
   }
 
   const handleCreate = (params) => {
-    console.log("handleCreate");
     axios.post("http://localhost:3000/recipes.json", params).then((response) => {
-      console.log(response.data);
       // let copiedRecipes = Array.from(recipes);
       // copiedRecipes.push(response.data);
       // setRecipes(copiedRecipes);
@@ -44,10 +40,8 @@ export function RecipesPage() {
   }
 
   const handleUpdate = (recipe, params) => {
-    console.log("handleUpdate");
     axios.patch(`http://localhost:3000/recipes/${recipe.id}.json`, params)
       .then((response) => {
-      console.log(response.data);
       // let updatedRecipes = [];
       // let index = 0;
       // while (index < recipes.length) {
@@ -65,6 +59,14 @@ export function RecipesPage() {
     })
   }
 
+  const handleDestroy = (recipe) => {
+    axios.delete(`http://localhost:3000/recipes/${recipe.id}.json`)
+      .then((response) => {
+        setRecipes(recipes.filter(r => r.id !== recipe.id));
+        setIsRecipesShowVisible(false);
+      })
+  }
+
   // handleIndex();
   useEffect(handleIndex, []);
   // useEffect - react hook
@@ -76,7 +78,7 @@ export function RecipesPage() {
       <RecipesNew onCreate={handleCreate} />
       <RecipesIndex recipesProp={recipes} onShow={handleShow} />
       <Modal show={isRecipesShowVisible} onClose={() => setIsRecipesShowVisible(false)}>
-        <RecipesShow recipe={currentRecipe} onUpdate={handleUpdate} />
+        <RecipesShow recipe={currentRecipe} onUpdate={handleUpdate} onDestroy={handleDestroy} />
       </Modal>
     </div>
   );
