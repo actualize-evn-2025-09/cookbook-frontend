@@ -74,7 +74,7 @@ export function RecipesPage() {
   // second argument - when we want it to run - [] means on page load
 
   return (
-    <div>
+    <div className="container">
       <RecipesNew onCreate={handleCreate} />
       <RecipesIndex recipesProp={recipes} onShow={handleShow} />
       <Modal show={isRecipesShowVisible} onClose={() => setIsRecipesShowVisible(false)}>
