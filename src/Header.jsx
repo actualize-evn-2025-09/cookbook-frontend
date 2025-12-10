@@ -1,4 +1,8 @@
+import { LogoutLink } from "./LogoutLink"
+
 export function Header() {
+  const email = localStorage.getItem("email")
+
   return (
     <header>
       <nav className="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -12,6 +16,16 @@ export function Header() {
               <a className="nav-link active" aria-current="page" href="#">Home</a>
               <a className="nav-link" href="#">All Recipes</a>
               <a className="nav-link" href="#">New Recipe</a>
+              {/* ternary operator */}
+              {email ? (
+                <>
+                  <div>Logged in as {email}</div>
+                  <LogoutLink />
+                </>
+              ) : (
+                <p>Signup</p> | 
+                <p>Login</p>
+              )}
             </div>
           </div>
         </div>
