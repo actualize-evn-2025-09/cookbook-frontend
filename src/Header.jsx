@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { LogoutLink } from "./LogoutLink"
 
 export function Header() {
@@ -13,7 +14,7 @@ export function Header() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
+              <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               <a className="nav-link" href="#">All Recipes</a>
               <a className="nav-link" href="#">New Recipe</a>
               {/* ternary operator */}
@@ -23,8 +24,10 @@ export function Header() {
                   <LogoutLink />
                 </>
               ) : (
-                <p>Signup</p> | 
-                <p>Login</p>
+                <>
+                  <Link className="nav-link" to="/signup">Signup</Link>
+                  <Link className="nav-link" to="/login">Login</Link>
+                </>
               )}
             </div>
           </div>

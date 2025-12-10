@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function SignupPage() {
   const [errors, setErrors] = useState([]);
   // use state object
   // special state variable
   // function to update the state variable
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,8 +19,7 @@ export function SignupPage() {
       .then((response) => {
         console.log(response.data);
         event.target.reset();
-        window.alert("Signup successful!");
-        window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error.response.data.errors);
