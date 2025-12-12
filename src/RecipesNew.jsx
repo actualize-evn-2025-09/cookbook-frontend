@@ -1,4 +1,4 @@
-export function RecipesNew({ onCreate }) {
+export function RecipesNew({ onCreate, tags }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // prevents the browser's default behavior
@@ -21,6 +21,17 @@ export function RecipesNew({ onCreate }) {
         </div>
         <div className="mb-3">
           Image URL: <input className="form-control" name="image_url" type="text" />
+        </div>
+        <div className="mb-3">
+          Tag:
+          <select name="tag_id" className="form-select">
+            <option value="">No tag</option>
+            {tags && tags.map((tag) => (
+              <option key={tag.id} value={tag.id}>
+                {tag.name}
+              </option>
+            ))}
+          </select>
         </div>
         <button className="btn btn-primary" type="submit">Create recipe</button>
       </form>
