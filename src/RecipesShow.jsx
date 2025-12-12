@@ -12,6 +12,20 @@ export function RecipesShow({ onUpdate, recipe, onDestroy }) {
       <h1>Recipe Info:</h1>
       <h2>{recipe.title}</h2>
       <p>Chef: {recipe.chef}</p>
+
+      <div className="mb-3">
+        <strong>Tags: </strong>
+        {recipe.tags && recipe.tags.length > 0 ? (
+          recipe.tags.map((tag) => (
+            <span key={tag.id} className="badge bg-info me-1">
+              {tag.name}
+            </span>
+          ))
+        ) : (
+          <span className="text-muted">No tags</span>
+        )}
+      </div>
+
       <hr />
       <h2>Edit Recipe</h2>
       <form onSubmit={handleSubmit}>

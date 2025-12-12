@@ -10,6 +10,18 @@ export function RecipesIndex({ recipesProp, onShow }) {
               <div className="card-body">
                 <h5 className="card-title">{recipe.title}</h5>
                 <p className="card-text">Chef: {recipe.chef}</p>
+
+                <div className="tags">
+                  {recipe.tags && 
+                  recipe.tags.map((tag) => (
+                    <span key={tag.id} className="badge bg-secondary me-1">
+                      {tag.name}
+                    </span>
+                  ))}
+                </div>
+
+                <br />
+
                 <button className="btn btn-primary" onClick={() => onShow(recipe)}>More Info</button>
               </div>
             </div>
