@@ -6,6 +6,8 @@ export function LogoutLink() {
     axios.delete("/sessions.json").then((response) => {
       console.log(response);
       localStorage.removeItem("email");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("admin");
       window.location.href = "/";
     });
   };

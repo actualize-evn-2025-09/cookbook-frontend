@@ -16,10 +16,10 @@ export function Header() {
             <div className="navbar-nav">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               <Link className="nav-link" to="/recipes">All Recipes</Link>
-              <Link className="nav-link" to="/recipes/new">New Recipe</Link>
               {/* ternary operator */}
               {email ? (
                 <>
+                  <Link className="nav-link" to="/recipes/new">New Recipe</Link>
                   <div>Logged in as {email}</div>
                   <LogoutLink />
                 </>
