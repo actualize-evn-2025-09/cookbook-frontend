@@ -11,7 +11,9 @@ import { RecipesIndexPage } from "./RecipesIndexPage";
 import { RecipesNewPage } from "./RecipesNewPage";
 import { RecipesShowPage } from "./RecipesShowPage";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = process.env.NODE_ENV === "development" 
+  ? "http://localhost:3000" 
+  : "https://cookbook-backend-actualize.onrender.com";
 // if it's in development mode, use localhost:3000, else use the deployed backend
 axios.defaults.withCredentials = true;
 
